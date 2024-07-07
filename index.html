@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine JS with Materialize CSS</title>
+    <!-- Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Alpine JS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+
+    <div class="container">
+        <div x-data="{ title: 'Hello Basil' }" class="section">
+            <p x-text="title"></p>
+            <button class="btn" @click="title='😅Basil Rocks😅'">Click</button>
+        </div>
+        <div x-data="{ count: 0 }" class="section">
+            <p x-text="count"></p>
+            <button class="btn" @click="count++">Count+</button>
+            <button class="btn" @click="if(count > 0) count--">Count-</button>
+        </div>
+        <div x-data="{ countdown: 10 }" x-init="setInterval(function() {
+            countdown--;
+            if (countdown < 0) {
+                countdown = 10;
+            }
+        }, 1000);" class="section">
+            <h1 x-text="countdown"></h1>
+            <p>lol it doesnt go to negetive ,,delt with that </p>
+        </div>
+        <div x-data="{ show: false }" class="section">
+            <button class="btn" @click="show=!show">Show</button>
+            <div x-show.transition="show">Hello MENTOR😅😅😅 </div>
+        </div>
+        <div x-data="{ code: '<p>Dynamic Paragraph</p>' }" class="section">
+            <div x-ref="sentence">I am a sentence</div>
+            <button class="btn" @click="$refs.sentence.innerText = 'I just changed'">Change Sentence</button>
+        </div>
+        <div x-data="{ socks: 'blue' }" class="section">
+            <template x-if="socks=='blue'">
+                <p>My socks are blue</p>
+            </template>
+            <template x-if="socks=='green'">
+                <p>My socks are green</p>
+            </template>
+            <button class="btn" @click="socks = 'green'">Change Socks</button>
+        </div>
+        <div x-data="{ groceries: ['Milk', 'Eggs', 'Cheese'] }" class="section">
+            <p>Groceries</p>
+            <ul class="collection">
+                <template x-for="item in groceries">
+                    <li class="collection-item" x-text="item"></li>
+                </template>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
